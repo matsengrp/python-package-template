@@ -20,7 +20,7 @@ jobs:
       uses: prefix-dev/setup-pixi@v0.8.3
       with:
         pixi-version: v0.42.1
-        # cache: true # I think the lock-file needs to be updated for this to work
+        cache: true # I think the lock-file needs to be updated for this to work - "pixi install" before push
   
     - name: Install dependencies with Pixi
       run: |
