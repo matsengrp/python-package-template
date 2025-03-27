@@ -2,7 +2,7 @@
 dependencies = ["rich"]                               
 name = "matsengrp_rich_example"
 requires-python = ">= 3.11"
-scripts = { rich-example-main = "rich_example:main" } 
+scripts = { rich-example-main = "matsengrp_rich_example:main" } 
 version = "0.1.0"
 
 [build-system] 
@@ -18,7 +18,7 @@ platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
 preview = ["pixi-build"]
 
 [tool.pixi.dependencies] 
-rich_example = { path = "." }
+matsengrp_rich_example = { path = "." }
 
 [tool.pixi.tasks] 
 start = "rich-example-main"
