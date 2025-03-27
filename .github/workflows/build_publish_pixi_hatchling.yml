@@ -41,5 +41,5 @@ jobs:
     
     - name: Publish Pixi package to matsengrp-test-channel
       run: |
-        pixi publish https://prefix.dev/api/v1/upload/matsengrp-test-channel *.conda
+        pixi upload https://prefix.dev/api/v1/upload/matsengrp-test-channel *.conda
       
