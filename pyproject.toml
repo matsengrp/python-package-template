@@ -3,7 +3,7 @@ dependencies = ["rich"]
 name = "matsengrp_rich_example"
 requires-python = ">= 3.11"
 scripts = { rich-example-main = "matsengrp_rich_example:main" } 
-version = "0.1.1"
+version = "0.1.2"
 
 [build-system]
 requires = ["hatchling"]
