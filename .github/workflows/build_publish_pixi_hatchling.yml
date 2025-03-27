@@ -41,6 +41,8 @@ jobs:
     
     - name: Publish Pixi package to matsengrp-test-channel
       run: |
-        pixi auth login --token ${{ secrets.PREFIX_DEV_TOKEN }}
+        pixi auth login \
+          --token ${{ secrets.PREFIX_DEV_TOKEN }} \
+          https://prefix.dev/api/v1/upload/matsengrp-test-channel
         pixi upload https://prefix.dev/api/v1/upload/matsengrp-test-channel *.conda
       
