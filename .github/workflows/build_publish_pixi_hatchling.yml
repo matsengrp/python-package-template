@@ -34,4 +34,12 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/
+
+    - name: Build Pixi package
+      run: |
+        pixi build
+    
+    - name: Publish Pixi package to matsengrp-test-channel
+      run: |
+        pixi publish https://prefix.dev/api/v1/upload/matsengrp-test-channel *.conda
       
