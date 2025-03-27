@@ -15,7 +15,7 @@ start = "rich-example-main"
 
 [package]  # this could also be ... features.default ?
 name = "matsengrp_rich_example"
-version = "0.1.1"
+version = "0.1.2"
 
 [package.build] 
 backend = { name = "pixi-build-python", version = "0.1.*" }
