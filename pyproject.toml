@@ -32,7 +32,8 @@ backend = { name = "pixi-build-python", version = "0.1.*" }
 # when installing build software as conda package, these should be
 # host dependencies, because they are only built at run time.
 [tool.pixi.package.host-dependencies] 
-hatchling = "==1.26.3"
+hatch = "*"
+# hatchling = "==1.26.3"
 python = "<=3.12, >=3.9"
 pip = "*"
 
