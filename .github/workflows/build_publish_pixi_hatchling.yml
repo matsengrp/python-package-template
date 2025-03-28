@@ -41,6 +41,7 @@ jobs:
         pixi install
 
     # Step 4: Build the PyPI package with hatch.
+    # TODO, should we be installing with pip (unless there's a 'hatch install') to test?
     - name: Build package with Hatchling
       run: |
         pixi run hatch build

@@ -2,6 +2,8 @@ from dataclasses import dataclass, fields
 from rich.console import Console
 from rich.table import Table
 
+__version__ = "0.1.6"
+
 
 @dataclass
 class Person:

@@ -1,13 +1,27 @@
+################################
+# PYTHON PACKAGE CONFIGURATION #
+################################
+
 [project]
 name = "matsengrp_rich_example"
 dependencies = ["rich"]                               
 requires-python = "<=3.12, >=3.9"
 scripts = { rich-example-main = "matsengrp_rich_example:main" } 
-version = "0.1.5"
+dynamic = ["version"]                                 # Use dynamic versioning
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+#########
+# HATCH #
+#########
+[tool.hatch.version]
+path = "src/matsen_rich_example/__init__.py"
+
+########
+# PIXI #
+########
 
 [tool.pixi.workspace] 
 channels = [
@@ -18,25 +32,32 @@ channels = [
 platforms = ["linux-64"]
 preview = ["pixi-build"]
 
-[tool.pixi.dependencies] 
-matsengrp_rich_example = { path = "." }
 
-[tool.pixi.tasks] 
-start = "rich-example-main"
-
-# [tool.pixi.package]
-
-[tool.pixi.package.build] 
-backend = { name = "pixi-build-python", version = "0.1.*" }
 
 # when installing build software as conda package, these should be
 # host dependencies, because they are only built at run time.
 [tool.pixi.package.host-dependencies] 
-hatch = "*"
-# hatchling = "==1.26.3"
+hatchling = "*"
 python = "<=3.12, >=3.9"
-pip = "*"
 
-# Really, you should let `pixi add` edit this.
-[tool.pixi.package.run-dependencies] 
+[tool.pixi.dependencies] # dependencies for your "default" environment
+
+# Source code for our package - to install it into out env
+matsengrp_rich_example = { path = "." }
+
+# Hatch is required, yet again, because I want hatch exposed
+# in my default environment for building the pypi package
+hatch = "*" 
+
+[tool.pixi.tasks]
+# These are commands that you want to use without prefixing "$ pixi run"
+start = "rich-example-main"
+
+[tool.pixi.package.build]
+# This is where you can specify how to build your package, 
+# here we use a backend that converts a python (wheel) package into a conda package.
+backend = { name = "pixi-build-python", version = "0.1.*" }
+
+[tool.pixi.package.run-dependencies]
+# Here, you specify conda packages that you want during runtime, 
 rich = "13.9.*"
