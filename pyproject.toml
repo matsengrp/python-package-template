@@ -1,10 +1,41 @@
 [project]
-dependencies = ["rich"]                               
 name = "matsengrp_rich_example"
-requires-python = ">= 3.11"
+dependencies = ["rich"]                               
+requires-python = "<=3.12, >=3.9"
 scripts = { rich-example-main = "matsengrp_rich_example:main" } 
-version = "0.1.4"
+version = "0.1.5"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.pixi.workspace] 
+channels = [
+  "https://prefix.dev/pixi-build-backends",
+  "https://prefix.dev/conda-forge",
+]
+# platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
+platforms = ["linux-64"]
+preview = ["pixi-build"]
+
+[tool.pixi.dependencies] 
+matsengrp_rich_example = { path = "." }
+
+[tool.pixi.tasks] 
+start = "rich-example-main"
+
+# [tool.pixi.package]
+
+[tool.pixi.package.build] 
+backend = { name = "pixi-build-python", version = "0.1.*" }
+
+# when installing build software as conda package, these should be
+# host dependencies, because they are only built at run time.
+[tool.pixi.package.host-dependencies] 
+hatchling = "==1.26.3"
+python = "<=3.12, >=3.9"
+pip = "*"
+
+# Really, you should let `pixi add` edit this.
+[tool.pixi.package.run-dependencies] 
+rich = "13.9.*"

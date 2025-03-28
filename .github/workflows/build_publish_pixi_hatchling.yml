@@ -1,11 +1,17 @@
-name: Build and Publish Python Package with Pixi
+name: Build and Publish `Pixi` Package
 
+# when should you run this workflow?
+# in this case, we're building and deploying the package - so
+# this workflow will run on pushes to the repository that create a new tag
+# You can also manually trigger this workflow using the "workflow_dispatch" event.
 on:
   push:
     tags:
       - 'v*'
   workflow_dispatch:  # Allows manual triggering
 
+# TODO Matrix python - See pixi docs below.
+# https://pixi.sh/latest/tutorials/multi_environment/#using-multiple-environments-to-test-multiple-versions-of-a-package
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,32 +19,44 @@ jobs:
       id-token: write
 
     steps:
+    # Step 1: Check out the code from the repository
+    # This step uses the actions/checkout action to clone the repository
+    # into the GitHub Actions runner, allowing subsequent steps to access the code.
     - name: Checkout
       uses: actions/checkout@v3
   
+    # Step 2: Set Up PIXI
+    # This step is to install pixi for python management
     - name: setup pixi
       uses: prefix-dev/setup-pixi@v0.8.3
       with:
         pixi-version: v0.42.1
-        cache: true # I think the lock-file needs to be updated for this to work - "pixi install" before push
-  
+        # I think the lock-file needs to be updated for this to work - "pixi install" before push
+        # Maybe if this was the first step before checkout?
+        cache: true 
+    
+    # Step 3: Set up Python dependencies
     - name: Install dependencies with Pixi
       run: |
         pixi install
 
+    # Step 4: Build the PyPI package with hatch.
     - name: Build package with Hatchling
       run: |
         pixi run hatch build
 
+    # Step 5: Publish the package to PyPI
     - name: Publish to TestPyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/
 
+    # Step 6: Build the "pixi (.conda) package" with `pixi build`
     - name: Build Pixi package
       run: |
         pixi build
     
+    # Step 7: Authenticate and Publish the Pixi package
     - name: Publish Pixi package to matsengrp-test-channel
       run: |
         pixi auth login \
