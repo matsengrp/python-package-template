@@ -1,29 +1,21 @@
+[project] # package metadata
 ################################
 # PYTHON PACKAGE CONFIGURATION #
 ################################
-
-[project]
 name = "matsengrp_rich_example"
+version = "0.1.8"
 dependencies = ["rich"]                               
 requires-python = "<=3.12, >=3.9"
 scripts = { rich-example-main = "matsengrp_rich_example:main" } 
-dynamic = ["version"]                                 # Use dynamic versioning
 
-[build-system]
+[build-system] # build system configuration
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-#########
-# HATCH #
-#########
-[tool.hatch.version]
-path = "src/matsen_rich_example/__init__.py"
-
-########
-# PIXI #
-########
-
-[tool.pixi.workspace] 
+[tool.pixi.workspace] # "workspace" configuration 
+################################
+# PIXI PACKAGE CONFIGURATION ###
+################################
 channels = [
   "https://prefix.dev/pixi-build-backends",
   "https://prefix.dev/conda-forge",
@@ -32,32 +24,26 @@ channels = [
 platforms = ["linux-64"]
 preview = ["pixi-build"]
 
-
-
-# when installing build software as conda package, these should be
-# host dependencies, because they are only built at run time.
-[tool.pixi.package.host-dependencies] 
-hatchling = "*"
-python = "<=3.12, >=3.9"
-
 [tool.pixi.dependencies] # dependencies for your "default" environment
-
 # Source code for our package - to install it into out env
 matsengrp_rich_example = { path = "." }
-
 # Hatch is required, yet again, because I want hatch exposed
 # in my default environment for building the pypi package
 hatch = "*" 
 
-[tool.pixi.tasks]
-# These are commands that you want to use without prefixing "$ pixi run"
+[tool.pixi.tasks] # commands that you want to use without prefixing "$ pixi run"
 start = "rich-example-main"
 
-[tool.pixi.package.build]
+# when installing build software as conda package, these should be
+# host dependencies, because they are only built at run time.
+[tool.pixi.package.host-dependencies] # dependencies needed during build of python package
+hatchling = "*"
+python = "<=3.12, >=3.9"
+
+[tool.pixi.package.build] # build configuration for *pixi* package
 # This is where you can specify how to build your package, 
 # here we use a backend that converts a python (wheel) package into a conda package.
 backend = { name = "pixi-build-python", version = "0.1.*" }
 
-[tool.pixi.package.run-dependencies]
-# Here, you specify conda packages that you want during runtime, 
+[tool.pixi.package.run-dependencies] # specify conda packages that you want during runtime, these override pypi dependencies
 rich = "13.9.*"
