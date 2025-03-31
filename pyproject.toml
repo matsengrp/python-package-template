@@ -3,7 +3,7 @@
 # PYTHON PACKAGE CONFIGURATION #
 ################################
 name = "matsengrp_rich_example"
-version = "0.1.8"
+version = "0.1.9"
 dependencies = ["rich"]                               
 requires-python = "<=3.12, >=3.9"
 scripts = { rich-example-main = "matsengrp_rich_example:main" } 
@@ -11,6 +11,8 @@ scripts = { rich-example-main = "matsengrp_rich_example:main" }
 [build-system] # build system configuration
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+
 
 [tool.pixi.workspace] # "workspace" configuration 
 ################################

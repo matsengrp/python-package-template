@@ -721,14 +721,14 @@ packages:
   timestamp: 1733250550053
 - conda: .
   name: matsengrp_rich_example
-  version: 0.1.8
+  version: 0.1.9
   build: pyhbf21a9e_0
   subdir: noarch
   depends:
   - rich 13.9.*
   - python
   input:
-    hash: 849a14b4b8ee5dec5cf71e192eefbd8a9c36cceb321881de4136461c960c54f4
+    hash: 96981693522be3842186cfc22d93fd45292ad4d1ee51c826dd818f7af2a6f810
     globs:
     - pyproject.toml
 - conda: https://prefix.dev/conda-forge/noarch/mdurl-0.1.2-pyhd8ed1ab_1.conda
